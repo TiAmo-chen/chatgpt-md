@@ -1,5 +1,5 @@
 # vscode
-.vscode 
+.vscode
 
 # Intellij
 *.iml
@@ -8,6 +8,7 @@
 # npm
 node_modules
 npm-debug.log
+package-lock.json
 
 # Exclude sourcemaps
 *.map
@@ -27,3 +28,6 @@ main.js
 !rollup.config.js
 !.eslintrc.js
 dist/
+
+# Claude Code
+.claude/
