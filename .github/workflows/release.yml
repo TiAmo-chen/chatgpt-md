@@ -32,7 +32,7 @@ jobs:
         run: |
           mkdir -p release
           cp manifest.json release/
-          cp main.js release/
+          cp dist/main.js release/
           cp README.md release/
           cp styles.css release/ 2>/dev/null || true
 
