@@ -33,13 +33,19 @@ const copyPlugin = {
       fs.copyFileSync("manifest.json", "dist/manifest.json");
       console.log("📋 已复制 manifest.json → dist/");
 
+      // 在 CI 环境中跳过本地复制操作
+      if (process.env.CI) {
+        console.log("🔄 CI 环境检测到，跳过本地插件目录复制");
+        return;
+      }
+
       // 确保目标目录存在
       if (!fs.existsSync(targetPluginDir)) {
         console.log(`⚠️  目标目录不存在: ${targetPluginDir}`);
         return;
       }
 
-      // 复制 dist/ 里的文件到插件目录
+      // 复制 dist/ 里的文件到插件目录（仅本地）
       const files = fs.readdirSync("dist");
       for (const file of files) {
         const srcPath = path.join("dist", file);
