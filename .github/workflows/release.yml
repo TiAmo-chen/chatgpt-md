@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build plugin
+        run: npm run build
+
+      - name: Create release files
+        run: |
+          mkdir -p release
+          cp manifest.json release/
+          cp main.js release/
+          cp README.md release/
+          cp styles.css release/ 2>/dev/null || true
+
+      - name: Create release archive
+        run: |
+          cd release
+          zip -r ../release.zip .
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # 获取 tag 名称（去掉 v 前缀）
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+          # 生成简单的 changelog
+          echo "## What's Changed" > changelog.md
+          echo "" >> changelog.md
+          echo "### Version $VERSION" >> changelog.md
+          echo "" >> changelog.md
+          echo "Full Changelog: https://github.com/${{ github.repository }}/commits/v$VERSION" >> changelog.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release.zip
+          body_path: changelog.md
+          draft: false
+          prerelease: ${{ contains(steps.changelog.outputs.version, 'beta') || contains(steps.changelog.outputs.version, 'alpha') || contains(steps.changelog.outputs.version, 'rc') }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
