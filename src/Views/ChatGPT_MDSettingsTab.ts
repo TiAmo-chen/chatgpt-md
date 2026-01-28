@@ -338,78 +338,78 @@ export class ChatGPT_MDSettingsTab extends PluginSettingTab {
       // Tool Calling
       {
         id: "enableToolCalling",
-        name: "Enable AI Tool Calling (Experimental, read only)",
+        name: "启用 AI 工具调用（实验性功能，仅限阅读）",
         description:
-          "Privacy Focus: All tool calls require your explicit approval before the LLM sees the data. " +
-          "Allow the AI to use tools: Search files, Read file contents, Web Search (Privacy focused Brave Search API). ",
+          "隐私保护：所有工具调用都需要你的明确批准，LLM 才能看到数据。 " +
+          "允许 AI 使用工具：搜索文件、读取文件内容、网络搜索（注重隐私的 Brave Search API）。 ",
         type: "toggle",
-        group: "Tool Calling",
+        group: "工具调用",
       },
       {
         id: "toolEnabledModels",
-        name: "Tool-Enabled Models",
+        name: "可使用工具的模型",
         description:
-          "Whitelist of models that can use tools. One pattern per line. " +
-          "Supports wildcards using * (e.g., gpt-4* matches gpt-4o, gpt-4-turbo). " +
-          "Model names are matched without provider prefix.",
+          "可以使用工具的模型白名单。每行一个模式。 " +
+          "支持使用 * 通配符（例如 gpt-4* 匹配 gpt-4o、gpt-4-turbo）。 " +
+          "模型名称匹配时不包含提供商前缀。",
         type: "textarea",
         placeholder: "gpt-5.2-*",
-        group: "Tool Calling",
+        group: "工具调用",
       },
 
       // Web Search (requires tool calling)
       {
         id: "enableWebSearch",
-        name: "Enable Web Search",
+        name: "启用网络搜索",
         description:
-          "Allow the AI to search the web for information using Brave Search. " +
-          "Requires tool calling to be enabled. " +
-          "Requires a free Brave Search API key (1,000 queries/month). " +
-          "Get yours at: https://api.search.brave.com/",
+          "允许 AI 使用 Brave Search 搜索网络信息。 " +
+          "需要启用工具调用。 " +
+          "需要免费的 Brave Search API 密钥（每月 1,000 次查询）。 " +
+          "获取地址：https://api.search.brave.com/",
         type: "toggle",
-        group: "Tool Calling",
+        group: "工具调用",
       },
       {
         id: "webSearchApiKey",
-        name: "Brave Search API Key",
-        description: "API key for Brave Search.",
+        name: "Brave Search API 密钥",
+        description: "Brave Search 的 API 密钥。",
         type: "text",
-        placeholder: "your Brave Search API key",
-        group: "Tool Calling",
+        placeholder: "你的 Brave Search API 密钥",
+        group: "工具调用",
       },
       {
         id: "webSearchProvider",
-        name: "Alternative Search Provider",
-        description: "Use a custom search API endpoint instead of Brave Search",
+        name: "备用搜索提供商",
+        description: "使用自定义搜索 API 端点代替 Brave Search",
         type: "dropdown",
         options: {
-          brave: "Brave Search (Default)",
-          custom: "Custom API Endpoint",
+          brave: "Brave Search（默认）",
+          custom: "自定义 API 端点",
         },
-        group: "Tool Calling",
+        group: "工具调用",
       },
       {
         id: "webSearchApiUrl",
-        name: "Custom Search API URL",
-        description: "URL for custom search API endpoint (only when using Custom provider)",
+        name: "自定义搜索 API URL",
+        description: "自定义搜索 API 端点的 URL（仅在使用自定义提供商时）",
         type: "text",
         placeholder: "https://your-search-api.com/search",
-        group: "Tool Calling",
+        group: "工具调用",
       },
       {
         id: "maxWebSearchResults",
-        name: "Max Web Search Results",
-        description: "Maximum number of search results to return (1-10)",
+        name: "最大网络搜索结果数",
+        description: "返回的最大搜索结果数（1-10）",
         type: "text",
         placeholder: "5",
-        group: "Tool Calling",
+        group: "工具调用",
       },
       {
         id: "debugMode",
-        name: "Debug Mode",
-        description: "Enable detailed logging for debugging tool operations. Messages will appear in the console.",
+        name: "调试模式",
+        description: "启用详细日志以调试工具操作。消息将显示在控制台中。",
         type: "toggle",
-        group: "Tool Calling",
+        group: "工具调用",
       },
     ];
 
