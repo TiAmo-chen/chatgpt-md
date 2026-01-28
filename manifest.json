@@ -7,5 +7,6 @@
   "author": "Deniz Okcu (created by Bram Adams)",
   "authorUrl": "https://www.bramadams.dev",
   "fundingUrl": "https://www.bramadams.dev/#/portal/",
-  "isDesktopOnly": false
+  "isDesktopOnly": false,
+  "main": "dist/main.js"
 }
